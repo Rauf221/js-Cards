@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h1 class="text-2xl font-bold mb-4">Create User</h1>
+        <form id="create-user-form" class="bg-white p-4 rounded-lg shadow-lg">
+            <div class="mb-4">
+                <label class="block mb-2">Name:</label>
+                <input type="text" id="name" class="p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2">Profession:</label>
+                <input type="text" id="profession" class="p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2">Image URL:</label>
+                <input type="text" id="image" class="p-2 border rounded w-full">
+            </div>
+            <div class="mb-4">
+                <label class="block mb-2">Online:</label>
+                <input type="checkbox" id="online" class="p-2 border rounded">
+            </div>
+            <button type="submit" class="bg-blue-500 text-white p-4 rounded-lg">Create User</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("create-user-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const profession = document.getElementById("profession").value;
+            const image = document.getElementById("image").value;
+            const online = document.getElementById("online").checked;
+
+            await fetch('http://localhost:3001/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, profession, image, online })
+            });
+
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
